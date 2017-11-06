@@ -7,9 +7,14 @@ class Tmsu < Formula
 
   depends_on "go" => :build
   depends_on "godep" => :build
-  
+
   go_resource "github.com/mattn/go-sqlite3" do
-    url "https://github.com/mattn/go-sqlite3.git"
+    # url "https://github.com/mattn/go-sqlite3.git"
+    url "https://github.com/faruzzy/go-sqlite3.git" # go 1.7 context patch
+  end
+
+  go_resource "github.com/hanwen/go-fuse" do
+    url "https://github.com/hanwen/go-fuse.git"
   end
 
   def install
