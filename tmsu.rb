@@ -9,8 +9,7 @@ class Tmsu < Formula
   depends_on "godep" => :build
 
   go_resource "github.com/mattn/go-sqlite3" do
-    # url "https://github.com/mattn/go-sqlite3.git"
-    url "https://github.com/faruzzy/go-sqlite3.git" # go 1.7 context patch
+    url "https://github.com/mattn/go-sqlite3.git"
   end
 
   go_resource "github.com/hanwen/go-fuse" do
@@ -19,7 +18,10 @@ class Tmsu < Formula
 
   def install
     ENV["GOPATH"] = buildpath
+
     Language::Go.stage_deps resources, buildpath/"src"
+
+    system "go", "get", "-u", "golang.org/x/crypto/blake2b"
 
     system "go", "build", "-o", "bin/tmsu", "github.com/oniony/TMSU"
     bin.install "bin/tmsu"
